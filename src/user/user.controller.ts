@@ -1,12 +1,12 @@
 import { Observable } from 'rxjs';
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Logger, Param, Post, UseGuards } from '@nestjs/common';
 
 import { UserDocument } from './schema';
 import { UserService } from './user.service';
 import { Public } from '../shared/decorator';
 import { CurrentUser } from '../shared/decorator';
 import { RefreshJwtGuard } from '../shared/guard';
-import { Tokens, UserPayload } from '../shared/interface';
+import { Tokens, UserPayload, Session } from '../shared/interface';
 import { AddAddressData, CreateUserData, UserCredentialsData } from './data-access';
 
 @Controller('user')
@@ -20,13 +20,13 @@ export class UserController {
 
   @Public()
   @Post('auth/login')
-  login(@Body() userCredentialsData: UserCredentialsData): Observable<Tokens> {
+  login(@Body() userCredentialsData: UserCredentialsData): Observable<Session> {
     return this.userService.login(userCredentialsData);
   }
 
   @Public()
   @Post('auth/register')
-  register(@Body() createUserData: CreateUserData): Observable<Tokens> {
+  register(@Body() createUserData: CreateUserData): Observable<Session> {
     return this.userService.register(createUserData);
   }
 
@@ -34,6 +34,7 @@ export class UserController {
   @UseGuards(RefreshJwtGuard)
   @Post('auth/oauth2')
   refresh(@CurrentUser() user: UserPayload, @Body('refreshToken') refreshToken: string): Observable<Tokens> {
+    console.log(refreshToken);
     return this.userService.refreshTokens({ id: user.id, role: user.role }, refreshToken);
   }
 

@@ -5,7 +5,7 @@ import { BadRequestException, ForbiddenException, Injectable, NotFoundException,
 
 import { Role } from '../shared/enum';
 import { AuthService } from '../shared/service';
-import { Payload, Tokens } from '../shared/interface';
+import { Payload, Session, Tokens } from '../shared/interface';
 import { User, UserDocument } from './schema/user.schema';
 import { AddAddressData, CreateUserData, UserCredentialsData } from './data-access';
 
@@ -13,9 +13,9 @@ import { AddAddressData, CreateUserData, UserCredentialsData } from './data-acce
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, private authService: AuthService) {}
 
-  login(userCredentialsData: UserCredentialsData): Observable<Tokens> {
+  login(userCredentialsData: UserCredentialsData): Observable<Session> {
     const { emailAddress, password } = userCredentialsData;
-    return this.getUserByEmail(emailAddress).pipe(
+    return from(this.userModel.findOne({ emailAddress })).pipe(
       switchMap((user) => {
         if (!user) throw new ForbiddenException('Provided credentials are not valid');
         return this.authService.compare(password, user.password).pipe(
@@ -24,7 +24,11 @@ export class UserService {
             return from(this.authService.createAuthenticationTokens({ id: user._id, role: Role.User })).pipe(
               switchMap((tokens) => {
                 user.whitelistedRefreshTokens.push(tokens.refreshToken);
-                return from(user.save()).pipe(map(() => tokens));
+                return from(user.save()).pipe(
+                  map(() => {
+                    return { ...tokens, user };
+                  }),
+                );
               }),
             );
           }),
@@ -33,9 +37,9 @@ export class UserService {
     );
   }
 
-  register(createUserData: CreateUserData): Observable<Tokens> {
+  register(createUserData: CreateUserData): Observable<Session> {
     const { password, emailAddress, phoneNumber, firstName, lastName } = createUserData;
-    return this.getUserByEmail(emailAddress).pipe(
+    return from(this.userModel.findOne({ emailAddress })).pipe(
       switchMap((exists) => {
         if (exists)
           throw new BadRequestException([{ field: 'emailAddress', error: 'Email is already in use' }], 'One or more fields are invalid');
@@ -46,7 +50,11 @@ export class UserService {
                 from(this.authService.createAuthenticationTokens({ id: user._id, role: Role.User })).pipe(
                   switchMap((tokens) => {
                     user.whitelistedRefreshTokens.push(tokens.refreshToken);
-                    return from(user.save()).pipe(map(() => tokens));
+                    return from(user.save()).pipe(
+                      map(() => {
+                        return { ...tokens, user };
+                      }),
+                    );
                   }),
                 ),
               ),
