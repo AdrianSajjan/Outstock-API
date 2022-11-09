@@ -5,17 +5,15 @@ import { MulterModule } from '@nestjs/platform-express';
 import * as AWS from 'aws-sdk';
 import { Request } from 'express';
 import * as multerS3 from 'multer-s3';
+
 import { Config } from '../config';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
-import { Category, CategorySchema, Product, ProductSchema } from './schema';
+import { Product, ProductSchema } from './schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([
-      { name: Product.name, schema: ProductSchema, collection: 'Products' },
-      { name: Category.name, schema: CategorySchema, collection: 'Categories' },
-    ]),
+    MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema, collection: 'Products' }]),
     MulterModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService<Config>) => ({

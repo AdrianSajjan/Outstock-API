@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
-import { Category } from './category.schema';
+import { Category, CategorySchema } from './category.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export type ProductDocument = Product & Document;
@@ -24,8 +24,8 @@ export class Product {
   @Prop()
   gender: string;
 
-  @Prop({ type: Object })
-  category: Category;
+  @Prop({ type: [CategorySchema] })
+  category: Array<Category>;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);
