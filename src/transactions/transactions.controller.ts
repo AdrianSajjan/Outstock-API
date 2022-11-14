@@ -5,9 +5,4 @@ import { TransactionsService } from './transactions.service';
 @Controller('transactions')
 export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) {}
-
-  @Post()
-  create(@Body() createTransactionDto: CreateTransactionData) {
-    return this.transactionsService.create(createTransactionDto);
-  }
 }

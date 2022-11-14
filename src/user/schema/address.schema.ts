@@ -5,7 +5,6 @@ export type AddressDocument = Address & Document;
 
 @Schema({ _id: true })
 export class Address {
-  @Prop()
   _id?: any;
 
   @Prop()

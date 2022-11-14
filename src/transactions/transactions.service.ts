@@ -1,24 +1,23 @@
+import { Model } from 'mongoose';
+import { from, Observable } from 'rxjs';
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Transaction, TransactionDocument } from './schema';
+import { CreateTransactionData, UpdateTransactionData } from './data-access';
 
 @Injectable()
 export class TransactionsService {
-  create(createTransactionDto: any) {
-    return 'This action adds a new transaction';
+  constructor(@InjectModel(Transaction.name) private readonly transactionModel: Model<TransactionDocument>) {}
+
+  create(user: string, createTransactionData: CreateTransactionData): Observable<TransactionDocument> {
+    return from(this.transactionModel.create({ user, ...createTransactionData }));
   }
 
-  findAll() {
-    return `This action returns all transactions`;
+  update(id: string, updateTransactionData: UpdateTransactionData): Observable<TransactionDocument> {
+    return from(this.transactionModel.findByIdAndUpdate(id, { $set: updateTransactionData }));
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} transaction`;
-  }
-
-  update(id: number, updateTransactionDto: any) {
-    return `This action updates a #${id} transaction`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} transaction`;
+  updateByOrderID(order: string, updateTransactionData: UpdateTransactionData): Observable<TransactionDocument> {
+    return from(this.transactionModel.findOneAndUpdate({ order }, { $set: updateTransactionData }));
   }
 }

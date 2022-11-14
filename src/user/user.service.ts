@@ -5,7 +5,7 @@ import { BadRequestException, ForbiddenException, Injectable, NotFoundException,
 
 import { Role } from '../shared/enum';
 import { AuthService } from '../shared/service';
-import { Payload, Session, Tokens } from '../shared/interface';
+import { Payload, ResponseMessage, Session, Tokens } from '../shared/interface';
 import { User, UserDocument } from './schema/user.schema';
 import { AddAddressData, CreateUserData, UserCredentialsData } from './data-access';
 
@@ -81,7 +81,7 @@ export class UserService {
     );
   }
 
-  logout(id: string, refreshToken: string): Observable<any> {
+  logout(id: string, refreshToken: string): Observable<ResponseMessage> {
     return from(this.userModel.findOne({ _id: id, whitelistedRefreshTokens: refreshToken })).pipe(
       switchMap((user) => {
         const index = user.whitelistedRefreshTokens.findIndex((token) => token === refreshToken);
@@ -91,7 +91,7 @@ export class UserService {
     );
   }
 
-  logoutAll(id: string): Observable<any> {
+  logoutAll(id: string): Observable<ResponseMessage> {
     return from(this.userModel.findByIdAndUpdate(id, { $set: { whitelistedRefreshTokens: [] } })).pipe(
       map(() => ({ message: 'User has been logged out' })),
     );

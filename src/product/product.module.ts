@@ -14,27 +14,27 @@ import { Product, ProductSchema } from './schema';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Product.name, schema: ProductSchema, collection: 'Products' }]),
-    MulterModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService<Config>) => ({
-        storage: multerS3({
-          s3: new AWS.S3({
-            credentials: {
-              accessKeyId: configService.get('s3.accessKeyID', { infer: true }),
-              secretAccessKey: configService.get('s3.secretAccessKey', { infer: true }),
-            },
-            region: configService.get('s3.region', { infer: true }),
-          }),
-          bucket: configService.get('s3.bucketName', { infer: true }),
-          acl: 'public-read',
-          key: function (_: Request, file: Express.Multer.File, cb: Function) {
-            const date = new Date();
-            cb(null, `${date.toISOString()}-${file.originalname}`);
-          },
-        }),
-      }),
-      inject: [ConfigService],
-    }),
+    // MulterModule.registerAsync({
+    //   imports: [ConfigModule],
+    //   useFactory: async (configService: ConfigService<Config>) => ({
+    //     storage: multerS3({
+    //       s3: new AWS.S3({
+    //         credentials: {
+    //           accessKeyId: configService.get('s3.accessKeyID', { infer: true }),
+    //           secretAccessKey: configService.get('s3.secretAccessKey', { infer: true }),
+    //         },
+    //         region: configService.get('s3.region', { infer: true }),
+    //       }),
+    //       bucket: configService.get('s3.bucketName', { infer: true }),
+    //       acl: 'public-read',
+    //       key: function (_: Request, file: Express.Multer.File, cb: Function) {
+    //         const date = new Date();
+    //         cb(null, `${date.toISOString()}-${file.originalname}`);
+    //       },
+    //     }),
+    //   }),
+    //   inject: [ConfigService],
+    // }),
   ],
   controllers: [ProductController],
   providers: [ProductService],

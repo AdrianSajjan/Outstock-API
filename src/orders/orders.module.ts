@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { OrdersController } from './orders.controller';
 import { TransactionsModule } from '../transactions/transactions.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Order, OrderSchema } from './schema';
 
 @Module({
-  imports: [TransactionsModule],
+  imports: [TransactionsModule, MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema, collection: 'Orders' }])],
   controllers: [OrdersController],
   providers: [OrdersService],
 })

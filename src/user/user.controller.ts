@@ -6,7 +6,7 @@ import { UserService } from './user.service';
 import { Public } from '../shared/decorator';
 import { CurrentUser } from '../shared/decorator';
 import { RefreshJwtGuard } from '../shared/guard';
-import { Tokens, UserPayload, Session } from '../shared/interface';
+import { Tokens, UserPayload, Session, ResponseMessage } from '../shared/interface';
 import { AddAddressData, CreateUserData, UserCredentialsData } from './data-access';
 
 @Controller('user')
@@ -39,12 +39,12 @@ export class UserController {
   }
 
   @Post('auth/logout')
-  logout(@CurrentUser() user: UserPayload, @Body('refreshToken') refreshToken: string): Observable<any> {
+  logout(@CurrentUser() user: UserPayload, @Body('refreshToken') refreshToken: string): Observable<ResponseMessage> {
     return this.userService.logout(user.id, refreshToken);
   }
 
   @Get('auth/logout-all')
-  logoutAll(@CurrentUser() user: UserPayload): Observable<any> {
+  logoutAll(@CurrentUser() user: UserPayload): Observable<ResponseMessage> {
     return this.userService.logoutAll(user.id);
   }
 
