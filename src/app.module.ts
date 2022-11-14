@@ -12,6 +12,9 @@ import { AdminModule } from './admin/admin.module';
 import { SiteModule } from './site/site.module';
 import { LoggerMiddleware } from './shared/middleware';
 import { CategoryModule } from './category/category.module';
+import { OrdersModule } from './orders/orders.module';
+import { TransactionsModule } from './transactions/transactions.module';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
@@ -30,6 +33,9 @@ import { CategoryModule } from './category/category.module';
     AdminModule,
     SiteModule,
     CategoryModule,
+    OrdersModule,
+    TransactionsModule,
+    CartModule,
   ],
   providers: [
     {

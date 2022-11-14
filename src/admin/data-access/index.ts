@@ -1,1 +1,1 @@
-export * from './admin.data-access';
+export * from './admin-credentials.data-access';

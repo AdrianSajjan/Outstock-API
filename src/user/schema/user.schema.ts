@@ -4,7 +4,7 @@ import { Address, AddressSchema } from './address.schema';
 
 export type UserDocument = User & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class User {
   @Prop({ required: true })
   firstName: string;
@@ -38,6 +38,12 @@ export class User {
 
   @Prop({ type: [String], default: [] })
   whitelistedRefreshTokens: Array<string>;
+
+  @Prop()
+  createAt?: Date;
+
+  @Prop()
+  updatedAt?: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

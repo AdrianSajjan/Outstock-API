@@ -1,7 +1,11 @@
+import { Document } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+
+export type AddressDocument = Address & Document;
 
 @Schema({ _id: true })
 export class Address {
+  @Prop()
   _id?: any;
 
   @Prop()

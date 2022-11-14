@@ -19,12 +19,3 @@ export class CreateUserData {
   @IsNotEmpty({ message: 'Please provide a password' })
   password: string;
 }
-
-export class UserCredentialsData {
-  @IsEmail({}, { message: 'Please provide a valid email' })
-  @IsNotEmpty({ message: 'Email address should not be empty' })
-  emailAddress: string;
-
-  @IsNotEmpty({ message: 'Password should not be empty' })
-  password: string;
-}

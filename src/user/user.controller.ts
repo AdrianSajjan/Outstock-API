@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Body, Controller, Delete, Get, Logger, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 
 import { UserDocument } from './schema';
 import { UserService } from './user.service';
