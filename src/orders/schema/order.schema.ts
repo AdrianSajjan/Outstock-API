@@ -18,6 +18,9 @@ export class Order {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name })
   user: User;
 
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: Transaction.name })
+  transaction?: Transaction;
+
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: Cart.name })
   cart: Cart;
 

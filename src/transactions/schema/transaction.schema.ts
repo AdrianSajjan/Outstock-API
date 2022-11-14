@@ -45,7 +45,8 @@ export class Transaction {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name })
   user: User;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: Order.name })
+  // To prevent circular dependency issue
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Order' })
   order: Order;
 
   @Prop()
