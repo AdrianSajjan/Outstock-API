@@ -6,6 +6,9 @@
 .env
 .env.development
 
+# Static Assets
+/uploads
+
 
 # Logs
 logs

@@ -11,8 +11,11 @@ export class Category {
   @Prop({ required: true })
   code: number;
 
+  @Prop()
+  root: boolean;
+
   @Prop({ type: mongoose.Types.ObjectId, ref: Category.name })
-  parent: this;
+  parent?: this;
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Category);

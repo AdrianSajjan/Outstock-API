@@ -1,8 +1,9 @@
 import { Body, Controller, Get, Param, Post, Query, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { from, map } from 'rxjs';
 import { Public, Roles } from '../shared/decorator';
 import { Role } from '../shared/enum';
-import { CreateProductData, FetchProductData } from './data-access';
+import { CreateProductData } from './data-access';
 import { ProductService } from './product.service';
 
 @Controller('product')
@@ -11,14 +12,14 @@ export class ProductController {
 
   @Get()
   @Public()
-  getAllProducts(@Query() fetchProductData: FetchProductData) {
-    return this.productService.findAllProducts(fetchProductData);
+  getAllProducts(@Query() query: string) {
+    return this.productService.findAllProducts();
   }
 
-  @Get(':id')
+  @Get(':slug')
   @Public()
-  getProductByID(@Param('id') id: string) {
-    return null;
+  getProductBySlug(@Param('slug') slug: string) {
+    return this.productService.findProductBySlug(slug);
   }
 
   @Post('upload')
