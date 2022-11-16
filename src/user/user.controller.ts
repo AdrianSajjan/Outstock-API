@@ -34,7 +34,6 @@ export class UserController {
   @UseGuards(RefreshJwtGuard)
   @Post('auth/oauth2')
   refresh(@CurrentUser() user: UserPayload, @Body('refreshToken') refreshToken: string): Observable<Tokens> {
-    console.log(refreshToken);
     return this.userService.refreshTokens({ id: user.id, role: user.role }, refreshToken);
   }
 

@@ -12,8 +12,6 @@ export class ProductService {
   async findAllProducts(query: Partial<FetchProductQueryData>) {
     const { sort, price, limit = 0, page = 1, category } = query;
 
-    console.log(sort);
-
     const prices = price?.map(({ $gt, $lt }) => ({ price: { $gt, $lt } }));
 
     const filter = { $and: [{ category }, prices?.length ? { $or: prices } : {}] };
