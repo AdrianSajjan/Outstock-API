@@ -1,25 +1,62 @@
-import { Type } from 'class-transformer';
-import { IsArray, IsEmail, IsNumber, IsNumberString, IsOptional, IsString } from 'class-validator';
+import { parseJson } from '../../shared/lib';
+import { Transform, Type } from 'class-transformer';
+import { IsArray, IsNotEmpty, IsNumber, IsNumberString, IsObject, IsOptional, IsString, ValidateNested } from 'class-validator';
 
 export class PriceQueryData {
   @IsOptional()
-  @IsNumber()
+  @IsNumberString()
   @Type(() => Number)
+  @IsNumber()
   $lt: number;
 
   @IsOptional()
-  @IsNumber()
+  @IsNumberString()
   @Type(() => Number)
+  @IsNumber()
   $gt: number;
 }
 
+export class SortQueryData {
+  @IsOptional()
+  @IsNumberString()
+  @Type(() => Number)
+  @IsNumber()
+  createdAt: number;
+
+  @IsOptional()
+  @IsNumberString()
+  @Type(() => Number)
+  @IsNumber()
+  price: number;
+}
 export class FetchProductQueryData {
-  @IsEmail()
+  @IsOptional()
+  @IsString()
   category: string;
 
-  @IsEmail()
-  subcategory: string;
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @Transform(parseJson, { toClassOnly: true })
+  @Type(() => SortQueryData)
+  @IsObject()
+  @IsNotEmpty()
+  sort: string;
 
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  page: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  limit: number;
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @Transform(parseJson, { toClassOnly: true })
+  @Type(() => PriceQueryData)
   @IsArray()
-  price: Partial<PriceQueryData>;
+  @IsNotEmpty()
+  price: Array<PriceQueryData>;
 }

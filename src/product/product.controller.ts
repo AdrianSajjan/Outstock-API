@@ -13,8 +13,7 @@ export class ProductController {
   @Get()
   @Public()
   getAllProducts(@Query() query: FetchProductQueryData) {
-    console.log(typeof query.price?.$gt);
-    return this.productService.findAllProducts();
+    return this.productService.findAllProducts(query);
   }
 
   @Get(':slug')

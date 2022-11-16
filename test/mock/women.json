@@ -1,0 +1,104 @@
+[
+  {
+    "name": "Loose Fitting Jeans",
+    "slug": "loose-fitting-jeans-qAM6MLM2U8I0",
+    "sku": "zpNFzcH8",
+    "price": 2400.0,
+    "currency": "Rs",
+    "gender": ["women"],
+    "category": { "$oid": "63691fbd9e0b922da0cd285e" },
+    "subcategory": { "$oid": "63691fbd9e0b922da0cd2861" },
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
+    "images": [
+      "http://localhost:5000/static/products/womens-jeans-1.webp",
+      "http://localhost:5000/static/products/womens-jeans-1.webp",
+      "http://localhost:5000/static/products/womens-jeans-1.webp",
+      "http://localhost:5000/static/products/womens-jeans-1.webp"
+    ]
+  },
+  {
+    "name": "Cargo Jeans",
+    "slug": "cargo-jeans-qjTdMQOn67yu",
+    "price": 2000.0,
+    "currency": "Rs",
+    "sku": "Tdrhk3tZ",
+    "gender": ["women"],
+    "category": { "$oid": "63691fbd9e0b922da0cd285e" },
+    "subcategory": { "$oid": "63691fbd9e0b922da0cd2861" },
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
+    "images": [
+      "http://localhost:5000/static/products/womens-jeans-2.webp",
+      "http://localhost:5000/static/products/womens-jeans-2.webp",
+      "http://localhost:5000/static/products/womens-jeans-2.webp",
+      "http://localhost:5000/static/products/womens-jeans-2.webp"
+    ]
+  },
+  {
+    "name": "Floral Colorful Top",
+    "slug": "floral-colorful-top-XdK3zZrEe3r4",
+    "price": 1250.0,
+    "currency": "Rs",
+    "sku": "w8x1oOwV",
+    "gender": ["women"],
+    "category": { "$oid": "63691fbd9e0b922da0cd285e" },
+    "subcategory": { "$oid": "63691fbd9e0b922da0cd2861" },
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
+    "images": [
+      "http://localhost:5000/static/products/womens-top-1.webp",
+      "http://localhost:5000/static/products/womens-top-1.webp",
+      "http://localhost:5000/static/products/womens-top-1.webp",
+      "http://localhost:5000/static/products/womens-top-1.webp"
+    ]
+  },
+  {
+    "name": "Mercury Tracksuit",
+    "slug": "mercury-tracksuit-A49gZ8b5af47",
+    "price": 1375.0,
+    "currency": "Rs",
+    "sku": "Ea4R9kYU",
+    "gender": ["women"],
+    "category": { "$oid": "63691fbd9e0b922da0cd285e" },
+    "subcategory": { "$oid": "63691fbd9e0b922da0cd2861" },
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
+    "images": [
+      "http://localhost:5000/static/products/womens-tracksuit-1.webp",
+      "http://localhost:5000/static/products/womens-tracksuit-1.webp",
+      "http://localhost:5000/static/products/womens-tracksuit-1.webp",
+      "http://localhost:5000/static/products/womens-tracksuit-1.webp"
+    ]
+  },
+  {
+    "name": "Loose Fitting Tshirt",
+    "slug": "loose-fitting-tshirt-3hjlY16Oag57",
+    "price": 3750.0,
+    "currency": "Rs",
+    "sku": "Ea4R9kYU",
+    "gender": ["women"],
+    "category": { "$oid": "63691fbd9e0b922da0cd285e" },
+    "subcategory": { "$oid": "63691fbd9e0b922da0cd2861" },
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
+    "images": [
+      "http://localhost:5000/static/products/womens-tshirt-1.webp",
+      "http://localhost:5000/static/products/womens-tshirt-1.webp",
+      "http://localhost:5000/static/products/womens-tshirt-1.webp",
+      "http://localhost:5000/static/products/womens-tshirt-1.webp"
+    ]
+  },
+  {
+    "name": "Regular Fit Tshirt",
+    "slug": "regular-fit-tshirt-JCSMzFnZaht3",
+    "price": 900.0,
+    "currency": "Rs",
+    "sku": "Ea4R9kYU",
+    "gender": ["women"],
+    "category": { "$oid": "63691fbd9e0b922da0cd285e" },
+    "subcategory": { "$oid": "63691fbd9e0b922da0cd2861" },
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
+    "images": [
+      "http://localhost:5000/static/products/womens-tshirt-2.webp",
+      "http://localhost:5000/static/products/womens-tshirt-2.webp",
+      "http://localhost:5000/static/products/womens-tshirt-2.webp",
+      "http://localhost:5000/static/products/womens-tshirt-2.webp"
+    ]
+  }
+]

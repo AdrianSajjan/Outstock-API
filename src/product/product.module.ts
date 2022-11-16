@@ -1,10 +1,10 @@
+import { nanoid } from 'nanoid';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { nanoid } from 'nanoid';
 
-import { Config } from '../config';
-import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
+import { ProductController } from './product.controller';
+import { CategoryModule } from '../category/category.module';
 import { Product, ProductDocument, ProductSchema } from './schema';
 
 @Module({
@@ -31,6 +31,7 @@ import { Product, ProductDocument, ProductSchema } from './schema';
         },
       },
     ]),
+    CategoryModule,
   ],
   controllers: [ProductController],
   providers: [ProductService],
