@@ -1,10 +1,10 @@
-import { Body, Controller, Get, Param, Post, Query, UploadedFiles, UseInterceptors } from '@nestjs/common';
-import { FilesInterceptor } from '@nestjs/platform-express';
 import { from, map } from 'rxjs';
-import { Public, Roles } from '../shared/decorator';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { Body, Controller, Get, Param, Post, Query, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { Role } from '../shared/enum';
-import { CreateProductData } from './data-access';
 import { ProductService } from './product.service';
+import { Public, Roles } from '../shared/decorator';
+import { FetchProductQueryData, CreateProductData } from './data-access';
 
 @Controller('product')
 export class ProductController {
@@ -12,7 +12,8 @@ export class ProductController {
 
   @Get()
   @Public()
-  getAllProducts(@Query() query: string) {
+  getAllProducts(@Query() query: FetchProductQueryData) {
+    console.log(typeof query.price?.$gt);
     return this.productService.findAllProducts();
   }
 

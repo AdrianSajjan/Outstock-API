@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { config, Config } from './config';
 import { AccessJwtGuard, RolesGuard } from './shared/guard';
-import { ErrorValidationPipe } from './shared/pipes';
+import { AppValidationPipe } from './shared/pipes';
 import { UserModule } from './user/user.module';
 import { ProductModule } from './product/product.module';
 import { AdminModule } from './admin/admin.module';
@@ -40,7 +40,7 @@ import { CartModule } from './cart/cart.module';
   providers: [
     {
       provide: APP_PIPE,
-      useClass: ErrorValidationPipe,
+      useClass: AppValidationPipe,
     },
     {
       provide: APP_GUARD,
