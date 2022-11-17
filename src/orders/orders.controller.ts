@@ -1,4 +1,4 @@
-import { from, map, Observable, of, switchMap } from 'rxjs';
+import { from, map, Observable, switchMap } from 'rxjs';
 import { Controller, Post, Body, Patch, Param } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CurrentUser } from '../shared/decorator';
@@ -31,7 +31,7 @@ export class OrdersController {
     const { status, ...updateTransactionData } = data;
     return from(this.orderService.update(id, { status })).pipe(
       switchMap((order) => {
-        return from(this.transactionService.updateByOrderID(order._id, updateTransactionData)).pipe(map(() => order));
+        return from(this.transactionService.update(order.transaction._id, updateTransactionData)).pipe(map(() => order));
       }),
     );
   }

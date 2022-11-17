@@ -3,10 +3,26 @@ import { OrdersService } from './orders.service';
 import { OrdersController } from './orders.controller';
 import { TransactionsModule } from '../transactions/transactions.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Order, OrderSchema } from './schema';
+import { Order, OrderDocument, OrderSchema } from './schema';
 
 @Module({
-  imports: [TransactionsModule, MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema, collection: 'Orders' }])],
+  imports: [
+    TransactionsModule,
+    MongooseModule.forFeatureAsync([
+      {
+        name: Order.name,
+        collection: 'Orders',
+        useFactory: () => {
+          const schema = OrderSchema;
+          schema.pre<OrderDocument>(/^find/, function (next) {
+            this.populate('trasaction');
+            next();
+          });
+          return schema;
+        },
+      },
+    ]),
+  ],
   controllers: [OrdersController],
   providers: [OrdersService],
 })

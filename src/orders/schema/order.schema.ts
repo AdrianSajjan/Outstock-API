@@ -2,7 +2,7 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { User } from '../../user/schema';
 import { Cart } from '../../cart/schema';
-import { Transaction } from '../../transactions/schema';
+import { Transaction, TransactionDocument } from '../../transactions/schema';
 
 export type OrderDocument = Order & Document;
 
@@ -19,7 +19,7 @@ export class Order {
   user: User;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: Transaction.name })
-  transaction?: Transaction;
+  transaction?: TransactionDocument;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: Cart.name })
   cart: Cart;
