@@ -66,6 +66,8 @@ export class UserService {
   }
 
   refreshTokens(payload: Payload, refreshToken: string): Observable<Tokens> {
+    console.log(payload);
+    console.log(refreshToken);
     return from(this.userModel.findOne({ _id: payload.id, whitelistedRefreshTokens: refreshToken })).pipe(
       switchMap((user) => {
         if (!user) throw new UnauthorizedException('Session expired or not valid');

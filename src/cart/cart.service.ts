@@ -18,25 +18,48 @@ export class CartService {
     );
   }
 
-  updateCart(id: string, product: ProductDocument, quantity: number, size?: string): Observable<CartDocument> {
+  addProductToCart(id: string, product: ProductDocument): Observable<CartDocument> {
     return from(this.cartModel.findById(id)).pipe(
       switchMap((cart) => {
-        const index = cart.items.findIndex((item) => item.product === product._id);
-        if (index === -1) {
-          cart.items[index].quantity = quantity;
-          return from(cart.save());
+        const index = cart.items.findIndex((item) => item.product._id == product._id);
+        if (index !== -1) {
+          cart.items[index].quantity = cart.items[index].quantity + 1;
         } else {
-          cart.items.push({ product: product, quantity, size });
+          cart.items.push({ product: product, quantity: 1 });
         }
+        cart.totalPrice = cart.totalPrice + product.price;
+        return from(cart.save());
+      }),
+    );
+  }
+
+  removeProductFromCart(id: string, product: ProductDocument): Observable<CartDocument> {
+    return from(this.cartModel.findById(id)).pipe(
+      switchMap((cart) => {
+        const index = cart.items.findIndex((item) => item.product._id == product._id);
+        if (index !== -1) cart.items[index].quantity = cart.items[index].quantity - 1;
+        if (cart.items[index].quantity === 0) cart.items = cart.items.filter((item) => item.product._id != product._id);
+        cart.totalPrice = cart.totalPrice - product.price;
+        return from(cart.save());
       }),
     );
   }
 
   emptyCart(id: string): Observable<CartDocument> {
-    return from(this.cartModel.findByIdAndUpdate(id, { $set: { items: [] } }));
+    return from(this.cartModel.findByIdAndUpdate(id, { $set: { items: [], totalPrice: 0 } }));
   }
 
-  removeItemFromCart(id: string, item: string): Observable<CartDocument> {
-    return from(this.cartModel.findByIdAndUpdate(id, { $pull: { items: { _id: item } } }));
+  removeItemFromCart(id: string, _item: string): Observable<CartDocument> {
+    return from(this.cartModel.findById(id)).pipe(
+      switchMap((cart) => {
+        const index = cart.items.findIndex((item) => item._id == _item);
+        if (index !== -1) {
+          const totalItemPrice = cart.items[index].product.price * cart.items[index].quantity;
+          cart.totalPrice = cart.totalPrice - totalItemPrice;
+          cart.items = cart.items.filter((item) => item._id != _item);
+        }
+        return from(cart.save());
+      }),
+    );
   }
 }
