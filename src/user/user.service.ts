@@ -66,21 +66,19 @@ export class UserService {
   }
 
   refreshTokens(payload: Payload, refreshToken: string): Observable<Tokens> {
-    console.log(payload);
-    console.log(refreshToken);
-    return from(this.userModel.findOne({ _id: payload.id, whitelistedRefreshTokens: refreshToken })).pipe(
-      switchMap((user) => {
-        if (!user) throw new UnauthorizedException('Session expired or not valid');
-        return from(this.authService.createAuthenticationTokens(payload)).pipe(
-          switchMap((tokens) => {
-            const index = user.whitelistedRefreshTokens.findIndex((token) => token === refreshToken);
-            if (index !== -1) user.whitelistedRefreshTokens.splice(index, 1);
-            user.whitelistedRefreshTokens.push(tokens.refreshToken);
-            return from(user.save()).pipe(map(() => tokens));
-          }),
-        );
-      }),
-    );
+    // return from(this.userModel.findOne({ _id: payload.id, whitelistedRefreshTokens: refreshToken })).pipe(
+    //   switchMap((user) => {
+    //     if (!user) throw new UnauthorizedException('Session expired or not valid');
+    return from(this.authService.createAuthenticationTokens(payload));
+    //       switchMap((tokens) => {
+    //         const index = user.whitelistedRefreshTokens.findIndex((token) => token === refreshToken);
+    //         if (index !== -1) user.whitelistedRefreshTokens.splice(index, 1);
+    //         user.whitelistedRefreshTokens.push(tokens.refreshToken);
+    //         return from(user.save()).pipe(map(() => tokens));
+    //       }),
+    //     );
+    //   }),
+    // );
   }
 
   logout(id: string, refreshToken: string): Observable<ResponseMessage> {

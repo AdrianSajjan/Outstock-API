@@ -27,7 +27,7 @@ export class Order {
   fullName: string;
 
   @Prop()
-  email: string;
+  emailAddress: string;
 
   @Prop()
   phoneNumber: string;

@@ -1,6 +1,6 @@
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { User } from '../../user/schema';
+import { User, UserDocument } from '../../user/schema';
 import { Order, OrderDocument } from '../../orders/schema';
 
 export type TransactionDocument = Transaction & Document;
@@ -8,6 +8,9 @@ export type TransactionDocument = Transaction & Document;
 export enum PaymentType {
   UPI = 'upi',
   Card = 'card',
+  Netbanking = 'netbanking',
+  Wallet = 'wallet',
+  EMI = 'emi',
 }
 
 export enum PaymentStatus {
@@ -19,7 +22,7 @@ export enum PaymentStatus {
 }
 
 export enum RefundStatus {
-  NA = 'n/a',
+  NA = '',
   Full = 'full',
   Partial = 'partial',
   Failed = 'failed',
@@ -29,6 +32,7 @@ export interface Card {
   lastFourDigits: number;
   network: string;
   type: string;
+  issuer?: string;
   subType?: string;
 }
 
@@ -43,9 +47,8 @@ export interface TransactionError {
 @Schema({ timestamps: true })
 export class Transaction {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name })
-  user: User;
+  user: UserDocument;
 
-  // To prevent circular dependency issue
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: Order.name })
   order: OrderDocument;
 
@@ -53,12 +56,15 @@ export class Transaction {
   paymentID: string;
 
   @Prop()
+  oid: string;
+
+  @Prop()
   amount: number;
 
   @Prop()
-  invoiceID: string;
+  invoice: string;
 
-  @Prop(raw({ lastFourDigits: String, network: String, type: String, subType: String }))
+  @Prop({ type: Object })
   card?: Card;
 
   @Prop({ type: String, enum: ['created', 'authorized', 'captured', 'refunded', 'failed'], default: 'created' })
@@ -67,7 +73,7 @@ export class Transaction {
   @Prop()
   emailAddress: string;
 
-  @Prop({ type: String, enum: ['full', 'partial', 'failed'] })
+  @Prop({ type: String, enum: ['', 'full', 'partial', 'failed'] })
   refundStatus?: RefundStatus;
 
   @Prop()
@@ -79,8 +85,8 @@ export class Transaction {
   @Prop()
   phoneNumber: string;
 
-  @Prop({ type: String, enum: ['upi', 'card'] })
-  type: PaymentType;
+  @Prop({ type: String, enum: ['upi', 'card', 'netbanking', 'wallet', 'emi'] })
+  method: PaymentType;
 
   @Prop()
   createdAt?: Date;
