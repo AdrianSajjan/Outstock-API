@@ -1,17 +1,17 @@
-import { Observable } from 'rxjs';
 import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
-
+import { ConfigService } from '@nestjs/config';
+import { Observable } from 'rxjs';
+import { Config } from '../config';
+import { CurrentUser, Public } from '../shared/decorator';
+import { RefreshJwtGuard } from '../shared/guard';
+import { ResponseMessage, Session, Tokens, UserPayload } from '../shared/interface';
+import { AddAddressData, CreateUserData, UserCredentialsData } from './data-access';
 import { UserDocument } from './schema';
 import { UserService } from './user.service';
-import { Public } from '../shared/decorator';
-import { CurrentUser } from '../shared/decorator';
-import { RefreshJwtGuard } from '../shared/guard';
-import { Tokens, UserPayload, Session, ResponseMessage } from '../shared/interface';
-import { AddAddressData, CreateUserData, UserCredentialsData } from './data-access';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService, private readonly configService: ConfigService<Config>) {}
 
   @Get('auth')
   authenticate(@CurrentUser() user: UserPayload): Observable<UserDocument> {
@@ -60,5 +60,11 @@ export class UserController {
   @Delete('address/:id')
   deleteAddress(@Param('id') id: string, @CurrentUser() user: UserPayload): Observable<UserDocument> {
     return this.userService.deleteAddress(user.id, id);
+  }
+
+  @Get('/payment/key')
+  fetchPaymentPublicKey() {
+    const razorpayKey = this.configService.get('razorpay.keyID', { infer: true });
+    return { key: razorpayKey };
   }
 }

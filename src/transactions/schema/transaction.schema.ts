@@ -1,7 +1,7 @@
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { User } from '../../user/schema';
-import { Order } from '../../orders/schema';
+import { Order, OrderDocument } from '../../orders/schema';
 
 export type TransactionDocument = Transaction & Document;
 
@@ -46,8 +46,8 @@ export class Transaction {
   user: User;
 
   // To prevent circular dependency issue
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Order' })
-  order: Order;
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: Order.name })
+  order: OrderDocument;
 
   @Prop()
   paymentID: string;

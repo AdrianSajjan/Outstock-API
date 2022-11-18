@@ -9,8 +9,8 @@ import { Order, OrderDocument } from './schema';
 export class OrdersService {
   constructor(@InjectModel(Order.name) private orderModel: Model<OrderDocument>) {}
 
-  create(createOrderData: CreateOrderData, id: string): Observable<OrderDocument> {
-    return from(this.orderModel.create({ ...createOrderData, user: id, status: 'created' }));
+  create(id: string, createOrderData: CreateOrderData): Observable<OrderDocument> {
+    return from(this.orderModel.create({ ...createOrderData, user: id }));
   }
 
   update(id: string, updateOrderData: UpdateOrderData) {

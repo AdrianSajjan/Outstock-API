@@ -2,7 +2,6 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { User } from '../../user/schema';
 import { Cart } from '../../cart/schema';
-import { Transaction, TransactionDocument } from '../../transactions/schema';
 
 export type OrderDocument = Order & Document;
 
@@ -18,11 +17,35 @@ export class Order {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name })
   user: User;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: Transaction.name })
-  transaction?: TransactionDocument;
-
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: Cart.name })
   cart: Cart;
+
+  @Prop()
+  oid: string;
+
+  @Prop()
+  fullName: string;
+
+  @Prop()
+  email: string;
+
+  @Prop()
+  phoneNumber: string;
+
+  @Prop()
+  state: string;
+
+  @Prop()
+  pinCode: string;
+
+  @Prop()
+  addressLineOne: string;
+
+  @Prop()
+  addressLineTwo?: string;
+
+  @Prop()
+  cityOrDistrict: string;
 
   @Prop()
   totalAmount: number;
