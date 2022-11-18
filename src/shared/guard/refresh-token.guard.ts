@@ -11,6 +11,7 @@ export class RefreshJwtGuard extends AuthGuard('refresh-jwt') {
     if (error || !user) {
       throw error || new UnauthorizedException('Session invalid or expired');
     }
+
     return user;
   }
 }

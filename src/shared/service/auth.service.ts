@@ -29,7 +29,7 @@ export class AuthService {
     return from(
       this.jwtService.signAsync(payload, {
         secret: this.configService.get('secrets.access', { infer: true }),
-        expiresIn: '300s',
+        expiresIn: '10s',
       }),
     );
   }
