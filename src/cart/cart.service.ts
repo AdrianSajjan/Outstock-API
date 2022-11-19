@@ -10,7 +10,7 @@ export class CartService {
   constructor(@InjectModel(Cart.name) private cartModel: Model<CartDocument>) {}
 
   getActiveCartByUserID(id: string): Observable<CartDocument> {
-    return from(this.cartModel.findOne({ user: id, status: 'saved', isActive: true })).pipe(
+    return from(this.cartModel.findOne({ user: id, status: 'active', isActive: true })).pipe(
       switchMap((cart) => {
         if (cart) return of(cart);
         return from(this.cartModel.create({ user: id }));

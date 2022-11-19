@@ -1,4 +1,4 @@
-import { Model, Aggregate } from 'mongoose';
+import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { from, map, Observable } from 'rxjs';
 import { InjectModel } from '@nestjs/mongoose';

@@ -4,6 +4,7 @@ import { OrdersController } from './orders.controller';
 import { TransactionsModule } from '../transactions/transactions.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Order, OrderDocument, OrderSchema } from './schema';
+import { Transaction } from '../transactions/schema';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { Order, OrderDocument, OrderSchema } from './schema';
           const schema = OrderSchema;
 
           schema.pre<OrderDocument>(/^find/, function (next) {
-            this.populate({ path: 'cart', strictPopulate: false, populate: { path: 'items', strictPopulate: false } });
+            this.populate({ path: 'products.product', strictPopulate: false });
+            this.populate({ path: 'transactions', strictPopulate: false });
             next();
           });
 

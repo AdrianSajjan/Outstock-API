@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { from, map, Observable } from 'rxjs';
+import { from, map, Observable, switchMap } from 'rxjs';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateOrderData, UpdateOrderData } from './data-access';
@@ -24,5 +24,9 @@ export class OrdersService {
         throw new NotFoundException('No such orders exist in the database');
       }),
     );
+  }
+
+  findByUserID(user: string) {
+    return from(this.orderModel.find({ user }));
   }
 }

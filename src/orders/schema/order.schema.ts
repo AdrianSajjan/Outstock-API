@@ -1,7 +1,7 @@
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { User } from '../../user/schema';
-import { Cart } from '../../cart/schema';
+import { ProductsDocument, ProductsSchema } from './products.schema';
 
 export type OrderDocument = Order & Document;
 
@@ -12,13 +12,13 @@ export enum OrderStatus {
   Failed = 'failed',
 }
 
-@Schema({ timestamps: true })
+@Schema({ timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } })
 export class Order {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name })
   user: User;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: Cart.name })
-  cart: Cart;
+  @Prop({ type: [ProductsSchema] })
+  products: Array<ProductsDocument>;
 
   @Prop()
   oid: string;
@@ -60,4 +60,13 @@ export class Order {
   updatedAt?: Date;
 }
 
-export const OrderSchema = SchemaFactory.createForClass(Order);
+const OrderSchema = SchemaFactory.createForClass(Order);
+
+OrderSchema.virtual('transactions', {
+  ref: 'Transaction',
+  localField: '_id',
+  foreignField: 'order',
+  justOne: false,
+});
+
+export { OrderSchema };

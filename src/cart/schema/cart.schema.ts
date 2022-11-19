@@ -8,6 +8,7 @@ import { CartItem, CartItemSchema } from './item.schema';
 export type CartDocument = Cart & Document;
 
 export enum CartStatus {
+  Active = 'active',
   Saved = 'saved',
   Orderded = 'ordered',
 }
@@ -17,7 +18,7 @@ export class Cart {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: User.name })
   user: User;
 
-  @Prop({ type: String, enum: ['saved', 'ordered'], default: 'saved' })
+  @Prop({ type: String, enum: ['active', 'saved', 'ordered'], default: 'active' })
   status: CartStatus;
 
   @Prop({ type: Number, default: 0 })

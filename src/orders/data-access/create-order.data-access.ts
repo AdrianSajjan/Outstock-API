@@ -1,5 +1,7 @@
+import { Products } from '../schema/products.schema';
+
 export class CreateOrderData {
-  cart: string;
+  products: Products;
   totalAmount: number;
   status: string;
   oid: string;
