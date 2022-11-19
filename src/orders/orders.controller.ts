@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as Razorpay from 'razorpay';
-import { from, map, Observable, switchMap } from 'rxjs';
+import { from, Observable, switchMap } from 'rxjs';
 import { Config } from '../config';
 import { CurrentUser } from '../shared/decorator';
 import { UserPayload } from '../shared/interface';
@@ -41,7 +41,7 @@ export class OrdersController {
   }
 
   @Get(':id')
-  fetchOrderByID(@Param('id') id: string): Observable<OrderDocument> {
+  fetchOrderByID(@Param('id') id: string) {
     return this.orderService.findByID(id);
   }
 }

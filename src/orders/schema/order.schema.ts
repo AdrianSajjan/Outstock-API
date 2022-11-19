@@ -60,13 +60,4 @@ export class Order {
   updatedAt?: Date;
 }
 
-const OrderSchema = SchemaFactory.createForClass(Order);
-
-OrderSchema.virtual('transactions', {
-  ref: 'Transaction',
-  localField: '_id',
-  foreignField: 'order',
-  justOne: false,
-});
-
-export { OrderSchema };
+export const OrderSchema = SchemaFactory.createForClass(Order);

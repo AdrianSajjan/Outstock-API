@@ -31,6 +31,10 @@ export class TransactionsService {
     );
   }
 
+  findByUserID(user: string) {
+    return from(this.transactionModel.find({ user }));
+  }
+
   create(user: string, createTransactionData: CreateTransactionData) {
     const { razorpayOrderID, razorpayPaymentID, razorpaySignature, ...data } = createTransactionData;
 

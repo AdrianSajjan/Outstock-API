@@ -15,6 +15,7 @@ import { Product, ProductDocument, ProductSchema } from './schema';
         collection: 'Products',
         useFactory: () => {
           const schema = ProductSchema;
+
           schema.pre<ProductDocument>('save', function (next) {
             if (this.isNew) {
               const id = nanoid(12);
@@ -23,10 +24,12 @@ import { Product, ProductDocument, ProductSchema } from './schema';
             }
             next();
           });
+
           schema.pre<ProductDocument>(/^find/, function (next) {
             this.populate('category subcategory');
             next();
           });
+
           return schema;
         },
       },
