@@ -31,6 +31,11 @@ export class CartController {
     return this.cartService.emptyCart(id);
   }
 
+  @Get('/:id/ordered')
+  updateCartAsOrdered(@Param('id') id: string) {
+    return this.cartService.updateCartAsOrdered(id);
+  }
+
   @Delete(':id/item/:item')
   removeItemFromCart(@Param('id') id: string, @Param('item') item: string) {
     return this.cartService.removeItemFromCart(id, item);

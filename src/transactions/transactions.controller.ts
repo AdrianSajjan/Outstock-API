@@ -1,7 +1,7 @@
-import { Controller, Post, Patch, Param, Body } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { from } from 'rxjs';
-import { UserPayload } from '../shared/interface';
 import { CurrentUser } from '../shared/decorator';
+import { UserPayload } from '../shared/interface';
 import { CreateTransactionData, UpdateTransactionData } from './data-access';
 import { TransactionsService } from './transactions.service';
 
@@ -17,5 +17,10 @@ export class TransactionsController {
   @Patch(':id')
   updateTransaction(@Param('id') id: string, @Body() data: UpdateTransactionData) {
     return from(this.transactionsService.update(id, data));
+  }
+
+  @Get(':id')
+  fetchTransactionByID(@Param('id') id: string) {
+    return from(this.transactionsService.findByID(id));
   }
 }

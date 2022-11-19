@@ -1,7 +1,7 @@
 import { Model } from 'mongoose';
 import * as Razorpay from 'razorpay';
-import { from, Observable, switchMap } from 'rxjs';
-import { Injectable } from '@nestjs/common';
+import { from, map, Observable, switchMap } from 'rxjs';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Transaction, TransactionDocument } from './schema';
 import { CreateTransactionData, UpdateTransactionData } from './data-access';
@@ -10,7 +10,7 @@ import { Config } from '../config';
 
 @Injectable()
 export class TransactionsService {
-  razorpayInstance: any;
+  private razorpayInstance: any;
 
   constructor(
     @InjectModel(Transaction.name) private readonly transactionModel: Model<TransactionDocument>,
@@ -20,6 +20,15 @@ export class TransactionsService {
       key_id: configService.get('razorpay.keyID', { infer: true }),
       key_secret: configService.get('razorpay.secret', { infer: true }),
     });
+  }
+
+  findByID(id: string) {
+    return from(this.transactionModel.findById(id)).pipe(
+      map((transaction) => {
+        if (transaction) return transaction;
+        throw new NotFoundException('No such transactions exist in the database');
+      }),
+    );
   }
 
   create(user: string, createTransactionData: CreateTransactionData) {

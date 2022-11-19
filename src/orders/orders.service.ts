@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
-import { from, Observable } from 'rxjs';
-import { Injectable } from '@nestjs/common';
+import { from, map, Observable } from 'rxjs';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateOrderData, UpdateOrderData } from './data-access';
 import { Order, OrderDocument } from './schema';
@@ -15,5 +15,14 @@ export class OrdersService {
 
   update(id: string, updateOrderData: UpdateOrderData) {
     return from(this.orderModel.findByIdAndUpdate(id, { $set: updateOrderData }));
+  }
+
+  findByID(id: string) {
+    return from(this.orderModel.findById(id)).pipe(
+      map((order) => {
+        if (order) return order;
+        throw new NotFoundException('No such orders exist in the database');
+      }),
+    );
   }
 }

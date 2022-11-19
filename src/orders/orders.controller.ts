@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as Razorpay from 'razorpay';
 import { from, Observable, switchMap } from 'rxjs';
@@ -32,7 +32,11 @@ export class OrdersController {
 
   @Patch(':id')
   updateOrder(@Param('id') id: string, @Body() data: UpdateOrderData): Observable<OrderDocument> {
-    const { status } = data;
-    return from(this.orderService.update(id, { status }));
+    return from(this.orderService.update(id, data));
+  }
+
+  @Get(':id')
+  fetchOrderByID(@Param('id') id: string): Observable<OrderDocument> {
+    return from(this.orderService.findByID(id));
   }
 }

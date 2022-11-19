@@ -10,7 +10,7 @@ export class CartService {
   constructor(@InjectModel(Cart.name) private cartModel: Model<CartDocument>) {}
 
   getActiveCartByUserID(id: string): Observable<CartDocument> {
-    return from(this.cartModel.findOne({ user: id, isActive: true })).pipe(
+    return from(this.cartModel.findOne({ user: id, status: 'saved', isActive: true })).pipe(
       switchMap((cart) => {
         if (cart) return of(cart);
         return from(this.cartModel.create({ user: id }));
@@ -61,5 +61,9 @@ export class CartService {
         return from(cart.save());
       }),
     );
+  }
+
+  updateCartAsOrdered(id: string): Observable<CartDocument> {
+    return from(this.cartModel.findByIdAndUpdate(id, { $set: { isActive: false, status: 'ordered' } }));
   }
 }
