@@ -16,7 +16,7 @@ import { Product, ProductDocument, ProductSchema } from './schema';
         useFactory: () => {
           const schema = ProductSchema;
 
-          schema.index({ name: 'text', description: 'text', gender: 'text' });
+          schema.index({ name: 'text', description: 'text', gender: 'text' }, { name: 'text_search' });
 
           schema.pre<ProductDocument>('save', function (next) {
             if (this.isNew) {
