@@ -16,6 +16,8 @@ import { Product, ProductDocument, ProductSchema } from './schema';
         useFactory: () => {
           const schema = ProductSchema;
 
+          schema.index({ name: 'text', description: 'text', gender: 'text' });
+
           schema.pre<ProductDocument>('save', function (next) {
             if (this.isNew) {
               const id = nanoid(12);

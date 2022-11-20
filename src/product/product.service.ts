@@ -38,6 +38,10 @@ export class ProductService {
     ).pipe(map(([result]) => result));
   }
 
+  findProductsByTextSearch(search: string) {
+    return from(this.productModel.find({ $text: { $search: search } }));
+  }
+
   findProductBySlug(slug: string): Observable<ProductDocument> {
     return from(this.productModel.findOne({ slug }));
   }

@@ -16,8 +16,14 @@ export class ProductController {
     return this.productService.findAllProducts(query);
   }
 
-  @Get(':slug')
   @Public()
+  @Get('search')
+  searchProducts(@Query('key') key: string) {
+    return this.productService.findProductsByTextSearch(key);
+  }
+
+  @Public()
+  @Get(':slug')
   getProductBySlug(@Param('slug') slug: string) {
     return this.productService.findProductBySlug(slug);
   }
