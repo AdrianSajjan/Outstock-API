@@ -10,11 +10,11 @@ export class ProductService {
   constructor(@InjectModel(Product.name) private readonly productModel: Model<ProductDocument>) {}
 
   async findAllProducts(query: Partial<FetchProductQueryData>) {
-    const { sort, price, limit = 0, page = 1, category } = query;
+    const { price, limit = 0, page = 1, category } = query;
 
     const prices = price?.map(({ $gt, $lt }) => ({ price: { $gt, $lt } }));
 
-    const filter = { $and: [{ category }, prices?.length ? { $or: prices } : {}] };
+    const filter = { $and: [category ? { category } : {}, prices?.length ? { $or: prices } : {}] };
 
     const facet: Array<any> = [{ $match: filter }, { $skip: (page - 1) * limit }];
     if (limit > 0) facet.push({ $limit: limit });

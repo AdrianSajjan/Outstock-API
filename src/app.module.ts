@@ -15,6 +15,8 @@ import { CategoryModule } from './category/category.module';
 import { OrdersModule } from './orders/orders.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { CartModule } from './cart/cart.module';
+import { ReviewsModule } from './reviews/reviews.module';
+import { WishlistModule } from './wishlist/wishlist.module';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { CartModule } from './cart/cart.module';
     OrdersModule,
     TransactionsModule,
     CartModule,
+    ReviewsModule,
+    WishlistModule,
   ],
   providers: [
     {
