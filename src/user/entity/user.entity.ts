@@ -1,4 +1,4 @@
-import { Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 export class User {
   @PrimaryGeneratedColumn()
@@ -31,9 +31,9 @@ export class User {
   @Column()
   whitelistedRefreshTokens: string[];
 
-  @CreateDateColumn({ name: 'created_at' })
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
-  updatedAt?: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
