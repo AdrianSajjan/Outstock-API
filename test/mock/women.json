@@ -6,8 +6,16 @@
     "price": 2400.0,
     "currency": "Rs",
     "gender": ["women"],
-    "category": { "$oid": "63691fbd9e0b922da0cd285e" },
-    "subcategory": { "$oid": "63691fbd9e0b922da0cd2861" },
+    "category": {
+      "name": "clothing",
+      "code": 1
+    },
+    "subcategory": [
+      {
+        "name": "womens-clothing",
+        "code": 3
+      }
+    ],
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
     "images": [
       "http://localhost:5000/static/products/womens-jeans-1.webp",
@@ -23,8 +31,16 @@
     "currency": "Rs",
     "sku": "Tdrhk3tZ",
     "gender": ["women"],
-    "category": { "$oid": "63691fbd9e0b922da0cd285e" },
-    "subcategory": { "$oid": "63691fbd9e0b922da0cd2861" },
+    "category": {
+      "name": "clothing",
+      "code": 1
+    },
+    "subcategory": [
+      {
+        "name": "womens-clothing",
+        "code": 3
+      }
+    ],
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
     "images": [
       "http://localhost:5000/static/products/womens-jeans-2.webp",
@@ -40,8 +56,16 @@
     "currency": "Rs",
     "sku": "w8x1oOwV",
     "gender": ["women"],
-    "category": { "$oid": "63691fbd9e0b922da0cd285e" },
-    "subcategory": { "$oid": "63691fbd9e0b922da0cd2861" },
+    "category": {
+      "name": "clothing",
+      "code": 1
+    },
+    "subcategory": [
+      {
+        "name": "womens-clothing",
+        "code": 3
+      }
+    ],
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
     "images": [
       "http://localhost:5000/static/products/womens-top-1.webp",
@@ -57,8 +81,16 @@
     "currency": "Rs",
     "sku": "Ea4R9kYU",
     "gender": ["women"],
-    "category": { "$oid": "63691fbd9e0b922da0cd285e" },
-    "subcategory": { "$oid": "63691fbd9e0b922da0cd2861" },
+    "category": {
+      "name": "clothing",
+      "code": 1
+    },
+    "subcategory": [
+      {
+        "name": "womens-clothing",
+        "code": 3
+      }
+    ],
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
     "images": [
       "http://localhost:5000/static/products/womens-tracksuit-1.webp",
@@ -74,8 +106,16 @@
     "currency": "Rs",
     "sku": "Ea4R9kYU",
     "gender": ["women"],
-    "category": { "$oid": "63691fbd9e0b922da0cd285e" },
-    "subcategory": { "$oid": "63691fbd9e0b922da0cd2861" },
+    "category": {
+      "name": "clothing",
+      "code": 1
+    },
+    "subcategory": [
+      {
+        "name": "womens-clothing",
+        "code": 3
+      }
+    ],
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
     "images": [
       "http://localhost:5000/static/products/womens-tshirt-1.webp",
@@ -91,8 +131,16 @@
     "currency": "Rs",
     "sku": "Ea4R9kYU",
     "gender": ["women"],
-    "category": { "$oid": "63691fbd9e0b922da0cd285e" },
-    "subcategory": { "$oid": "63691fbd9e0b922da0cd2861" },
+    "category": {
+      "name": "clothing",
+      "code": 1
+    },
+    "subcategory": [
+      {
+        "name": "womens-clothing",
+        "code": 3
+      }
+    ],
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
     "images": [
       "http://localhost:5000/static/products/womens-tshirt-2.webp",

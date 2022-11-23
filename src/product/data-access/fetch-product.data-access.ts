@@ -35,6 +35,10 @@ export class FetchProductQueryData {
   category: string;
 
   @IsOptional()
+  @IsString()
+  subcategory: string;
+
+  @IsOptional()
   @ValidateNested({ each: true })
   @Transform(parseJson, { toClassOnly: true })
   @Type(() => SortQueryData)

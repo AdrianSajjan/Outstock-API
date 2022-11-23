@@ -16,7 +16,10 @@ import { Product, ProductDocument, ProductSchema } from './schema';
         useFactory: () => {
           const schema = ProductSchema;
 
-          schema.index({ name: 'text', description: 'text', gender: 'text' }, { name: 'text_search' });
+          schema.index(
+            { name: 'text', description: 'text', gender: 'text', 'category.name': 'text', 'subcategory.name': 'text' },
+            { name: 'text_search' },
+          );
 
           schema.pre<ProductDocument>('save', function (next) {
             if (this.isNew) {
@@ -24,11 +27,6 @@ import { Product, ProductDocument, ProductSchema } from './schema';
               const slug = this.name.toLowerCase().replace(/ /g, '-') + '-' + id;
               this.slug = slug;
             }
-            next();
-          });
-
-          schema.pre<ProductDocument>(/^find/, function (next) {
-            this.populate('category subcategory');
             next();
           });
 

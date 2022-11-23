@@ -6,8 +6,16 @@
     "price": 2400.0,
     "currency": "Rs",
     "gender": ["men"],
-    "category": { "$oid": "63691fbd9e0b922da0cd285f" },
-    "subcategory": { "$oid": "63691fbd9e0b922da0cd2862" },
+    "category": {
+      "name": "clothing",
+      "code": 1
+    },
+    "subcategory": [
+      {
+        "name": "mens-clothing",
+        "code": 4
+      }
+    ],
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
     "images": [
       "http://localhost:5000/static/products/mens-jeans-1.webp",
@@ -23,8 +31,16 @@
     "currency": "Rs",
     "sku": "TDthk3tZ",
     "gender": ["men"],
-    "category": { "$oid": "63691fbd9e0b922da0cd285f" },
-    "subcategory": { "$oid": "63691fbd9e0b922da0cd2862" },
+    "category": {
+      "name": "clothing",
+      "code": 1
+    },
+    "subcategory": [
+      {
+        "name": "mens-clothing",
+        "code": 4
+      }
+    ],
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
     "images": [
       "http://localhost:5000/static/products/mens-jeans-2.webp",
@@ -40,8 +56,16 @@
     "currency": "Rs",
     "sku": "w8Q1o5wV",
     "gender": ["men"],
-    "category": { "$oid": "63691fbd9e0b922da0cd285f" },
-    "subcategory": { "$oid": "63691fbd9e0b922da0cd2862" },
+    "category": {
+      "name": "clothing",
+      "code": 1
+    },
+    "subcategory": [
+      {
+        "name": "mens-clothing",
+        "code": 4
+      }
+    ],
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
     "images": [
       "http://localhost:5000/static/products/mens-shirt-1.webp",
@@ -57,8 +81,16 @@
     "currency": "Rs",
     "sku": "Ea4RX4YU",
     "gender": ["men"],
-    "category": { "$oid": "63691fbd9e0b922da0cd285f" },
-    "subcategory": { "$oid": "63691fbd9e0b922da0cd2862" },
+    "category": {
+      "name": "clothing",
+      "code": 1
+    },
+    "subcategory": [
+      {
+        "name": "mens-clothing",
+        "code": 4
+      }
+    ],
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
     "images": [
       "http://localhost:5000/static/products/mens-shirt-2.webp",
@@ -74,8 +106,16 @@
     "currency": "Rs",
     "sku": "Ea4R0kYU",
     "gender": ["men"],
-    "category": { "$oid": "63691fbd9e0b922da0cd285f" },
-    "subcategory": { "$oid": "63691fbd9e0b922da0cd2862" },
+    "category": {
+      "name": "clothing",
+      "code": 1
+    },
+    "subcategory": [
+      {
+        "name": "mens-clothing",
+        "code": 4
+      }
+    ],
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
     "images": [
       "http://localhost:5000/static/products/mens-tshirt-1.webp",
@@ -91,8 +131,16 @@
     "currency": "Rs",
     "sku": "Aa4R9kYU",
     "gender": ["men"],
-    "category": { "$oid": "63691fbd9e0b922da0cd285f" },
-    "subcategory": { "$oid": "63691fbd9e0b922da0cd2862" },
+    "category": {
+      "name": "clothing",
+      "code": 1
+    },
+    "subcategory": [
+      {
+        "name": "mens-clothing",
+        "code": 4
+      }
+    ],
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique atque sint tenetur. Voluptate maxime ullam modi hic eaque, provident iste voluptates eveniet natus minus beatae error, eum iusto nesciunt quibusdam?",
     "images": [
       "http://localhost:5000/static/products/mens-tshirt-2.webp",
