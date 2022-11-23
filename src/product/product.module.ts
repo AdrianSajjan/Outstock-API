@@ -6,6 +6,7 @@ import { ProductService } from './product.service';
 import { ProductController } from './product.controller';
 import { CategoryModule } from '../category/category.module';
 import { Product, ProductDocument, ProductSchema } from './schema';
+import { Review } from '../reviews/schema';
 
 @Module({
   imports: [
@@ -21,12 +22,23 @@ import { Product, ProductDocument, ProductSchema } from './schema';
             { name: 'text_search' },
           );
 
+          schema.virtual('reviews', {
+            ref: Review.name,
+            localField: '_id',
+            foreignField: 'product',
+          });
+
           schema.pre<ProductDocument>('save', function (next) {
             if (this.isNew) {
               const id = nanoid(12);
               const slug = this.name.toLowerCase().replace(/ /g, '-') + '-' + id;
               this.slug = slug;
             }
+            next();
+          });
+
+          schema.pre<ProductDocument>(/^find/, function (next) {
+            this.populate({ path: 'reviews', strictPopulate: false, populate: { path: 'reviews.user', strictPopulate: false } });
             next();
           });
 

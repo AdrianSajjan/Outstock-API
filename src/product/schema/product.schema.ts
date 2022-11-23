@@ -4,7 +4,7 @@ import { ProductCategoryDocument, ProductCategorySchema } from './product-catego
 
 export type ProductDocument = Product & Document;
 
-@Schema()
+@Schema({ toJSON: { virtuals: true } })
 export class Product {
   @Prop()
   name: string;
