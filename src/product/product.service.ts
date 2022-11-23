@@ -36,7 +36,9 @@ export class ProductService {
   }
 
   findProductsByTextSearch(search: string) {
-    return from(this.productModel.find({ $text: { $search: search } }));
+    return from(
+      this.productModel.find({ $text: { $search: search } }, { score: { $meta: 'textScore' } }).sort({ score: { $meta: 'textScore' } }),
+    );
   }
 
   findProductBySlug(slug: string): Observable<ProductDocument> {
