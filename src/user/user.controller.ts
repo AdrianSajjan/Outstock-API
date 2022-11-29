@@ -1,11 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Observable } from 'rxjs';
 import { Config } from '../config';
 import { CurrentUser, Public } from '../shared/decorator';
 import { RefreshJwtGuard } from '../shared/guard';
 import { ResponseMessage, Session, Tokens, UserPayload } from '../shared/interface';
-import { AddAddressData, CreateUserData, UserCredentialsData } from './data-access';
+import { AddAddressData, CreateUserData, UpdateUserData, UserCredentialsData } from './data-access';
 import { UserDocument } from './schema';
 import { UserService } from './user.service';
 
@@ -60,6 +60,14 @@ export class UserController {
   @Delete('address/:id')
   deleteAddress(@Param('id') id: string, @CurrentUser() user: UserPayload): Observable<UserDocument> {
     return this.userService.deleteAddress(user.id, id);
+  }
+
+  @Post('/profile')
+  uploadProfilePicture() {}
+
+  @Patch('/profile')
+  updateProfileData(@CurrentUser() user: UserPayload, @Body() data: UpdateUserData) {
+    return this.userService.updateProfileData(user, data);
   }
 
   @Get('/payment/key')

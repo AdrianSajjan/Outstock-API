@@ -5,9 +5,9 @@ import { BadRequestException, ForbiddenException, Injectable, NotFoundException,
 
 import { Role } from '../shared/enum';
 import { AuthService } from '../shared/service';
-import { Payload, ResponseMessage, Session, Tokens } from '../shared/interface';
+import { Payload, ResponseMessage, Session, Tokens, UserPayload } from '../shared/interface';
 import { User, UserDocument } from './schema/user.schema';
-import { AddAddressData, CreateUserData, UserCredentialsData } from './data-access';
+import { AddAddressData, CreateUserData, UpdateUserData, UserCredentialsData } from './data-access';
 
 @Injectable()
 export class UserService {
@@ -65,6 +65,10 @@ export class UserService {
     );
   }
 
+  updateProfileData(user: UserPayload, data: UpdateUserData): Observable<UserDocument> {
+    return from(this.userModel.findByIdAndUpdate(user.id, { $set: data }));
+  }
+
   refreshTokens(payload: Payload, refreshToken: string): Observable<Tokens> {
     return from(this.userModel.findOne({ _id: payload.id, whitelistedRefreshTokens: refreshToken })).pipe(
       switchMap((user) => {
@@ -106,7 +110,7 @@ export class UserService {
       }),
     );
   }
-  4;
+
   changeAddress(id: string, address: string): Observable<UserDocument> {
     return this.getUserByID(id).pipe(
       switchMap((user) => {
